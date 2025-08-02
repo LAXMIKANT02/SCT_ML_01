@@ -36,11 +36,14 @@
 <body>
     <div class="form-container">
         <h2>Enter House Details</h2>
-        <form method="post" action="{% url 'predict' %}">
+        <form method="post" action="{% url 'predictor:predict' %}">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Predict Price</button>
         </form>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'predictor:history' %}">View Prediction History</a>
     </div>
 </body>
 </html>

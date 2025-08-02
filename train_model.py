@@ -1,21 +1,35 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
 import joblib
 import os
 
-# Load the dataset
-data = pd.read_csv('data/house_data.csv')
+# Create 'data' directory if it doesn't exist
+os.makedirs('data', exist_ok=True)
 
-# Features and target
-X = data[['sq_footage', 'bedrooms', 'bathrooms']]
+# Example data
+data = pd.DataFrame({
+    'square_footage': [1000, 1500, 2000, 2500, 3000],
+    'bedrooms': [2, 3, 3, 4, 5],
+    'bathrooms': [1, 2, 2, 3, 4],
+    'price': [3000000, 4500000, 6000000, 7500000, 9000000]
+})
+
+X = data[['square_footage', 'bedrooms', 'bathrooms']]
 y = data['price']
 
-# Train model
+# Scale the features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Train model on scaled data
 model = LinearRegression()
-model.fit(X, y)
+model.fit(X_scaled, y)
 
-# Save using joblib
-os.makedirs('data', exist_ok=True)
-joblib.dump(model, 'data/house_price_model.pkl')
+# Save model to data/ directory
+joblib.dump(model, 'data/linear_model.pkl')
 
-print("Model trained and saved with joblib as 'data/house_price_model.pkl'")
+# Save scaler to data/ directory
+joblib.dump(scaler, 'data/scaler.pkl')
+
+print("Model and Scaler saved successfully in 'data/' directory.")
