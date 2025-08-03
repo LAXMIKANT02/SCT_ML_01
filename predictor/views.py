@@ -16,7 +16,7 @@ scaler = joblib.load(scaler_path)
 
 def home(request):
     form = HouseForm()
-    return render(request, 'predictor/index.html', {'form': form})
+    return render(request, 'predictor/html/index.html', {'form': form})
 
 def predict(request):
     if request.method == 'POST':
@@ -37,17 +37,17 @@ def predict(request):
                 predicted_price=prediction
             )
 
-            return render(request, 'predictor/result.html', {
+            return render(request, 'predictor/html/result.html', {
                 'prediction': round(prediction, 2),
                 'form': form
             })
     else:
         form = HouseForm()
-    return render(request, 'predictor/index.html', {'form': form})
+    return render(request, 'predictor/html/index.html', {'form': form})
 
 def prediction_history(request):
     records = PredictionHistory.objects.all().order_by('-created_at')
-    return render(request, 'predictor/history.html', {'records': records})
+    return render(request, 'predictor/html/history.html', {'records': records})
 
 @require_POST
 def delete_prediction(request, pk):
