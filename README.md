@@ -212,7 +212,7 @@ Contributions are welcome! If you have suggestions for improvements, bug fixes, 
 
 **Laxmikant S**
 
-🧑‍💼 [LinkedIn](www.linkedin.com/in/laxmikant-dadagi-b559b332a)
+🧑‍💼 [LinkedIn](https://www.linkedin.com/in/laxmikant-dadagi-b559b332a)
 
 ---
 
