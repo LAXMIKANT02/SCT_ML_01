@@ -1,45 +1,36 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Prediction Result</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 50px;
-            background: #f0fff0;
-        }
-        .result-box {
-            max-width: 400px;
-            margin: auto;
-            padding: 30px;
-            background: white;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .price {
-            font-size: 28px;
-            color: green;
-            font-weight: bold;
-        }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 6px;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/result.css' %}">
 </head>
 <body>
-    <div class="result-box">
-        <h2>Predicted House Price:</h2>
-        <div class="price">₹ {{ prediction }}</div>
-        <a href="{% url 'predictor:home' %}">Predict Again</a>
-    </div>
+    <nav class="navbar">
+        <div class="brand">🏠 Price Predictor</div>
+        <div class="links">
+            <a href="{% url 'predictor:home' %}">Home</a>
+            <a href="{% url 'predictor:history' %}">History</a>
+        </div>
+    </nav>
+
+    <section class="result-section">
+        <div class="result-card glass">
+            <h2>Predicted House Price</h2>
+            <div class="price" id="animatedPrice">₹ {{ prediction_price }}</div>
+            <a class="back-link" href="{% url 'predictor:home' %}">Predict Again</a>
+        </div>
+    </section>
+    <section class="chart-section">
+        <h2>Price Prediction Chart</h2>
+        <div class="priceChart">
+            <canvas id="priceChart"></canvas>
+        </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'js/result.js' %}"></script>
+    <footer>
+        <p>&copy; 2025 House Price Predictor. All rights reserved.</p>
+    </footer>
 </body>
 </html>

@@ -38,7 +38,7 @@ def predict(request):
             )
 
             return render(request, 'predictor/html/result.html', {
-                'prediction': round(prediction, 2),
+                'prediction_price': round(prediction, 2),
                 'form': form
             })
     else:
