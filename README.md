@@ -170,21 +170,6 @@ SCR\_ML\_01/
 * 🧠 Switch to deep learning for complex patterns
 
 ---
-
-## 👨‍💻 Developer
-
-**Laxmikant S**
-
-🧑‍💼 [LinkedIn](www.linkedin.com/in/laxmikant-dadagi-b559b332a)
-
----
-
-## 📃 License
-
-This project is licensed under the [MIT License](LICENSE).
-
----
-
 ### 🤝 Contributing
 
 Contributions are welcome! If you have suggestions for improvements, bug fixes, or new features, feel free to fork the repository and submit a pull request.
@@ -222,3 +207,19 @@ Contributions are welcome! If you have suggestions for improvements, bug fixes, 
 * Test thoroughly before submitting.
 * Document any new features or configurations.
 ---
+
+## 👨‍💻 Developer
+
+**Laxmikant S**
+
+🧑‍💼 [LinkedIn](www.linkedin.com/in/laxmikant-dadagi-b559b332a)
+
+---
+
+## 📃 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+
