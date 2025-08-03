@@ -1,35 +1,54 @@
 import pandas as pd
+import numpy as np
 from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import joblib
+import pickle
 import os
 
-# Create 'data' directory if it doesn't exist
-os.makedirs('data', exist_ok=True)
+# Ensure 'data/' directory exists
+os.makedirs("data", exist_ok=True)
 
-# Example data
-data = pd.DataFrame({
-    'square_footage': [1000, 1500, 2000, 2500, 3000],
-    'bedrooms': [2, 3, 3, 4, 5],
-    'bathrooms': [1, 2, 2, 3, 4],
-    'price': [3000000, 4500000, 6000000, 7500000, 9000000]
-})
+# Load dataset
+try:
+    df = pd.read_csv("data/train.csv")
+except FileNotFoundError:
+    print("Error: 'data/train.csv' not found.")
+    exit()
 
-X = data[['square_footage', 'bedrooms', 'bathrooms']]
-y = data['price']
+# Define features and target
+features = ['GrLivArea', 'OverallQual', 'TotalBsmtSF']
+target = 'SalePrice'
 
-# Scale the features
+# Drop rows with missing values
+df = df[features + [target]].dropna()
+
+# Features and target
+X = df[features]
+y = df[target]
+
+# Feature scaling
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# Train model on scaled data
+# Split data
+X_train, X_test, y_train, y_test = train_test_split(
+    X_scaled, y, test_size=0.2, random_state=42
+)
+
+# Train model
 model = LinearRegression()
-model.fit(X_scaled, y)
+model.fit(X_train, y_train)
 
-# Save model to data/ directory
-joblib.dump(model, 'data/linear_model.pkl')
+# Evaluate
+score = model.score(X_test, y_test)
+print(f"Model trained. R² score: {score:.4f}")
 
-# Save scaler to data/ directory
-joblib.dump(scaler, 'data/scaler.pkl')
+# Save model and scaler in 'data/' folder
+with open("data/house_price_model.pkl", "wb") as f:
+    pickle.dump(model, f)
 
-print("Model and Scaler saved successfully in 'data/' directory.")
+with open("data/scaler.pkl", "wb") as f:
+    pickle.dump(scaler, f)
+
+print("Model and scaler saved to 'data/' directory.")
